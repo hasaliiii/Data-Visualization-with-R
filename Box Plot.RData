@@ -1,0 +1,25 @@
+#checking whether ggplot2 package is available if not install
+if("ggplot2" %in% rownames(installed.packages()) == FALSE) {install.packages("ggplot2")}
+library(ggplot2)
+
+#install plotly
+install.packages("plotly")
+library(plotly)
+
+#generating random sets of data to represent in boxplot
+#To make the results reproducible
+set.seed(123)
+
+set_dataset1 <- rnorm(100, mean=1, sd=2)
+set_dataset2 <- rnorm(100, mean=0, sd=1)
+
+#creating the data frame
+df <- data.frame(label = factor(rep(c("X","Y"), each=100)), value = c(set_dataset1, set_dataset2))
+
+#output both the first and last rows
+head(df)
+tail(df)
+
+#Creating the Box Plot
+ggplot(df, aes(x=label, y=value)) + geom_boxplot()
+ggplotly()
